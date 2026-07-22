@@ -1,0 +1,14 @@
+{
+  "name": "oliver-portfolio",
+  "version": "1.0.0",
+  "description": "Showcase and testing harness for bryl-minimal-design system",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.3.0"
+  }
+}

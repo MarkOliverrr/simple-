@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mark Oliver </title>
+  <meta name="description" content="I'm Bryl Lim — a full-stack software and AI engineer. I build modern web apps, mobile apps, and generative AI products.">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Geist', 'system-ui', 'sans-serif'],
+            mono: ['Geist Mono', 'ui-monospace', 'monospace'],
+            pixel: ['Geist Pixel', 'Geist Mono', 'monospace'],
+          },
+          colors: {
+            ink: 'rgb(var(--ink) / <alpha-value>)',
+            white: 'rgb(var(--bg) / <alpha-value>)',
+            black: 'rgb(var(--ink) / <alpha-value>)',
+            gray: {
+              50: 'rgb(var(--g50) / <alpha-value>)', 
+              100: 'rgb(var(--g100) / <alpha-value>)', 
+              200: 'rgb(var(--g200) / <alpha-value>)', 
+              300: 'rgb(var(--g300) / <alpha-value>)',
+              400: 'rgb(var(--g400) / <alpha-value>)', 
+              500: 'rgb(var(--g500) / <alpha-value>)', 
+              600: 'rgb(var(--g600) / <alpha-value>)', 
+              700: 'rgb(var(--g700) / <alpha-value>)',
+              800: 'rgb(var(--g800) / <alpha-value>)', 
+              900: 'rgb(var(--g900) / <alpha-value>)', 
+              950: 'rgb(var(--g950) / <alpha-value>)',
+            },
+          },
+        }
+      }
+    }
+  </script>
+
+  <script>
+    // Immediate Theme Initialization (No FOUC)
+    (function () {
+      const root = document.documentElement;
+      const saved = localStorage.getItem('theme') || 'system';
+      const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const dark = saved === 'dark' || (saved === 'system' && systemDark);
+      root.classList.toggle('dark', dark);
+    })();
+  </script>
+</head>
+<body class="relative overflow-x-hidden bg-white font-sans text-ink antialiased">
+
+  <!-- Page-wide halftone backdrop overlays -->
+  <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0">
+    <div class="halftone halftone-wide mask-tr absolute right-0 top-0 h-[70vh] w-[65vw] opacity-[0.16]"></div>
+    <div class="halftone mask-bl absolute bottom-0 left-0 h-[60vh] w-[55vw] opacity-[0.13]"></div>
+  </div>
+
+  <!-- ─────────────── Fixed left sidebar (lg+) ─────────────── -->
+  <nav class="fixed inset-y-0 left-0 z-50 hidden w-56 flex-col border-r border-gray-200 bg-white px-7 py-8 lg:flex">
+    <a href="./index.html" class="shrink-0 font-pixel text-[15px] leading-none hover:opacity-60">Mark Oliver Gurtiza</a>
+
+    <div class="mt-9 flex flex-1 flex-col gap-4 overflow-y-auto font-mono text-[13px]">
+      <div class="flex flex-col gap-2.5">
+        <a href="./index.html" id="nav-home" class="current-page relative inline-flex w-fit items-center gap-2.5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" class="h-[1.15em] w-[1.15em] shrink-0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Home</a>
+        <a href="./projects.html" id="nav-projects" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" class="h-[1.15em] w-[1.15em] shrink-0"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg> Projects</a>
+      </div>
+      <div class="h-px bg-gray-200"></div>
+      <div class="flex flex-col gap-2.5">
+        <a href="./certifications.html" id="nav-certs" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink">Certifications</a>
+        <a href="./experience.html" id="nav-experience" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink">Experience</a>
+        <a href="./stack.html" id="nav-stack" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink">Stack</a>
+      </div>
+    </div>
+
+    <!-- Modals actions trigger -->
+    <button type="button" onclick="openAsk()" class="mt-6 inline-flex w-fit items-center gap-2 text-[12px] text-gray-400 hover:text-ink">
+      <span>Ask anything</span>
+      <span class="inline-flex items-center gap-1">
+        <kbd class="ask-mod-key rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-gray-500">⌘</kbd>
+        <span class="font-mono text-[10px] text-gray-400">+</span>
+        <kbd class="rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-gray-500">K</kbd>
+      </span>
+    </button>
+
+    <button type="button" onclick="openTyping()" class="mt-2.5 inline-flex w-fit items-center gap-2 text-[12px] text-gray-400 hover:text-ink">
+      <span>Typing test</span>
+      <span class="inline-flex items-center gap-1">
+        <kbd class="ask-mod-key rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-gray-500">⌘</kbd>
+        <span class="font-mono text-[10px] text-gray-400">+</span>
+        <kbd class="rounded border border-gray-300 bg-gray-50 px-1.5 py-0.5 font-mono text-[10px] leading-none text-gray-500">J</kbd>
+      </span>
+    </button>
+
+    <!-- Presence -->
+    <div class="mt-4 border-y border-gray-200 py-3.5">
+      <span class="presence-icons inline-flex items-center"></span>
+      <p class="presence-label mt-1 text-[10.5px] text-gray-400"><b class="presence-num">1</b> person viewing now</p>
+    </div>
+
+    <!-- Theme switch -->
+    <div class="mt-6 shrink-0">
+      <div class="mb-4 flex items-center gap-2">
+        <div class="theme-switch" role="group" aria-label="Theme">
+          <button type="button" data-theme-opt="system" onclick="setTheme('system', event)" class="theme-opt" title="System" aria-label="System theme">
+            <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </button>
+          <button type="button" data-theme-opt="light" onclick="setTheme('light', event)" class="theme-opt" title="Light" aria-label="Light theme">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+          </button>
+          <button type="button" data-theme-opt="dark" onclick="setTheme('dark', event)" class="theme-opt" title="Dark" aria-label="Dark theme">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <p class="text-[12px] leading-relaxed text-gray-400">reach me at</p>
+      <a href="mailto:olivergurtiza@gmail.com" class="mt-1.5 flex w-full min-w-0 items-center gap-1.5 overflow-hidden font-mono text-[11.5px] text-ink hover:text-gray-500"><svg viewBox="0 0 24 24" fill="none" class="h-[1.15em] w-[1.15em] shrink-0"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 7l8 6 8-6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="truncate">olivergurtiza@gmail.com</span></a>
+    </div>
+  </nav>
+
+  <!-- ─────────────── Mobile top bar (below lg) ─────────────── -->
+  <header class="sticky top-0 z-50 border-b border-gray-200/70 bg-white/90 backdrop-blur-md lg:hidden">
+    <div class="mx-auto flex max-w-3xl items-center justify-between px-6 py-3">
+      <a href="./index.html" class="font-pixel text-[14px]">Mark Oliver Gurtiza</a>
+      <button type="button" onclick="openMobileNav()" aria-label="Open menu" class="-mr-1 p-1 text-gray-700 hover:text-ink">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ─────────────── Mobile full-screen menu ─────────────── -->
+  <div id="mobileNav" class="fixed inset-0 z-[60] hidden flex-col bg-white lg:hidden">
+    <div class="flex items-center justify-between border-b border-gray-200 px-6 py-3">
+      <a href="./index.html" class="font-pixel text-[14px]">Mark Oliver Gurtiza</a>
+      <button type="button" onclick="closeMobileNav()" aria-label="Close menu" class="-mr-1 p-1 text-gray-700 hover:text-ink">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="flex flex-1 flex-col overflow-y-auto px-7 py-8 font-mono text-[16px]">
+      <div class="mnav-group flex flex-col gap-4" style="transition-delay: 0.05s">
+        <a href="./index.html" class="current-page relative inline-flex w-fit items-center gap-3">Home</a>
+        <a href="./projects.html" class="relative inline-flex w-fit items-center gap-3 text-gray-700 hover:text-ink">Projects</a>
+      </div>
+      <div class="my-5 h-px bg-gray-200"></div>
+      <div class="mnav-group flex flex-col gap-4" style="transition-delay: 0.11s">
+        <a href="./certifications.html" class="relative inline-flex w-fit items-center gap-3 text-gray-700 hover:text-ink">Certifications</a>
+        <a href="./experience.html" id="nav-experience" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink">Experience</a>
+        <a href="./stack.html" id="nav-stack" class="relative inline-flex w-fit items-center gap-2.5 text-gray-500 hover:text-ink">Stack</a>
+      </div>
+      <div class="my-5 h-px bg-gray-200"></div>
+      <div class="mnav-group flex flex-col gap-5" style="transition-delay: 0.17s">
+        <button type="button" onclick="closeMobileNav(); setTimeout(openAsk, 330);" class="inline-flex w-fit items-center gap-2 text-[14px] text-gray-500 hover:text-ink">
+          <span>ask anything</span>
+        </button>
+        <button type="button" onclick="closeMobileNav(); setTimeout(openTyping, 330);" class="inline-flex w-fit items-center gap-2 text-[14px] text-gray-500 hover:text-ink">
+          <span>typing test</span>
+        </button>
+      </div>
+      
+      <!-- Theme switch -->
+      <div class="mt-6">
+        <div class="flex items-center gap-2">
+          <div class="theme-switch" role="group" aria-label="Theme">
+            <button type="button" data-theme-opt="system" onclick="setTheme('system', event)" class="theme-opt" title="System" aria-label="System theme">
+              <svg viewBox="0 0 24 24" fill="none"><rect x="3" y="4" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M9 21h6M12 17v4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+            <button type="button" data-theme-opt="light" onclick="setTheme('light', event)" class="theme-opt" title="Light" aria-label="Light theme">
+              <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M5 5l1.4 1.4M17.6 17.6L19 19M19 5l-1.4 1.4M6.4 17.6L5 19" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            </button>
+            <button type="button" data-theme-opt="dark" onclick="setTheme('dark', event)" class="theme-opt" title="Dark" aria-label="Dark theme">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M20 13.6A8 8 0 1 1 10.4 4a6.2 6.2 0 0 0 9.6 9.6z" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  
+  <!-- ─────────────── Contained Main Content ─────────────── -->
+  <main id="top" class="relative z-10 lg:pl-56">
+    <div class="mx-auto max-w-2xl px-6">
+
+      <!-- ── Hero ── -->
+      <section class="relative pt-20 pb-16 sm:pt-28">
+        <div class="grid gap-9 sm:grid-cols-[14rem_1fr] sm:items-start sm:gap-10">
+          <div class="reveal d1 mx-auto w-full max-w-[14rem] sm:mx-0">
+            <div class="relative rounded-xl overflow-hidden border border-gray-200">
+              <img src="./images/oliver.jpg" alt="Mark Oliver Gurtiza" class="block w-full select-none" draggable="false">
+            </div>
+          </div>
+
+          <div>
+            <h1 class="reveal d2 font-pixel text-3xl leading-none sm:text-[2.6rem]">Mark Oliver Gurtiza</h1>
+            <p class="reveal d3 mt-6 text-[15px] leading-relaxed text-gray-600">
+              I am an aspiring software developer and Information Technology graduate with a passion for building modern web and mobile applications. 
+            </p>
+            <p class="reveal d4 mt-5 text-[15px] leading-relaxed text-gray-600">
+             Currently focused on Generative AI, I love building innovative projects daily and turning rough ideas into user-friendly apps. I am actively seeking entry-level Software Developer roles to apply my skills and gain valuable industry experience.
+            </p>
+
+            <div class="reveal d5 mt-7 flex flex-wrap items-center gap-x-3 gap-y-1.5 font-mono text-[12px] text-gray-500">
+              <a href="https://github.com/MarkOliverrr" target="_blank" rel="noopener" class="hover:text-ink">github ↗</a>
+              <a href="https://www.linkedin.com/in/markoliver-gurtiza/" target="_blank" rel="noopener" class="hover:text-ink">linkedin ↗</a>
+              <a href="https://www.instagram.com/_mrkolvr/" target="_blank" rel="noopener" class="hover:text-ink">instagram ↗</a>
+            </div>
+
+            <div class="reveal d5 mt-6 flex flex-wrap items-center gap-3">
+              <a href="./public/Mark Oliver Gurtiza CV.pdf" target="_blank" rel="noopener" class="inline-flex items-center rounded-full border border-gray-300 px-4 py-2 font-mono text-[12px] text-ink transition hover:bg-ink hover:text-white">
+                Open CV
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Stats ── -->
+     <section class="grid grid-cols-2 divide-x divide-y divide-gray-200 border-t border-gray-200 sm:grid-cols-3 sm:divide-y-0">
+  
+  <!-- 1K+ COMMITS -->
+  <div class="py-6 pr-5 sm:px-5 sm:pl-0">
+    <a href="https://github.com/MarkOliverrr" target="_blank" class="group block">
+      <div class="flex items-center gap-1">
+        <span class="font-pixel text-lg leading-none">20+</span>
+        <svg class="h-3 w-3 -translate-y-1 text-gray-300 transition-all group-hover:-translate-y-1.5 group-hover:translate-x-0.5 group-hover:text-ink" viewBox="0 0 16 16" fill="none"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="mt-2 font-mono text-[11px] uppercase tracking-wider text-gray-500 group-hover:text-ink">Projects</div>
+    </a>
+  </div>
+
+
+  <!-- IT GRADUATE -->
+  <div class="py-6 pr-5 sm:px-5">
+    <a href="https://www.linkedin.com/in/markoliver-gurtiza/" target="_blank" class="group block">
+      <div class="flex items-center gap-1">
+        <span class="font-pixel text-lg leading-none">IT</span>
+        <svg class="h-3 w-3 -translate-y-1 text-gray-300 transition-all group-hover:-translate-y-1.5 group-hover:translate-x-0.5 group-hover:text-ink" viewBox="0 0 16 16" fill="none"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="mt-2 font-mono text-[11px] uppercase tracking-wider text-gray-500 group-hover:text-ink">Graduate</div>
+    </a>
+  </div>
+
+  <!-- 0 -> 1 IDEAS TO APPS -->
+  <div class="py-6 pl-5 sm:px-5 sm:pr-0">
+    <a href="./experience.html" class="group block">
+      <div class="flex items-center gap-1">
+        <span class="font-pixel text-lg leading-none">4+</span>
+        <svg class="h-3 w-3 -translate-y-1 text-gray-300 transition-all group-hover:-translate-y-1.5 group-hover:translate-x-0.5 group-hover:text-ink" viewBox="0 0 16 16" fill="none"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="mt-2 font-mono text-[11px] uppercase tracking-wider text-gray-500 group-hover:text-ink">Years Coding</div>
+    </a>
+  </div>
+
+</section>
+
+      <!-- Halftone Divider -->
+      <div aria-hidden="true" class="halftone halftone-wide mask-fade-x my-2 h-6 w-full opacity-[0.18]"></div>
+
+      <!-- ── Experience ── -->
+      <section id="experience" class="py-14">
+        <div class="mb-6 flex items-baseline justify-between">
+          <h2 class="font-pixel text-sm text-gray-400">01 — experience</h2>
+          <a href="./experience.html" class="font-mono text-[11px] text-gray-400 hover:text-ink transition-colors duration-200">view all ↗</a>
+        </div>
+
+        <div class="divide-y divide-gray-200 border-y border-gray-200">
+          <div class="group grid grid-cols-12 items-baseline gap-3 py-2.5 hover:bg-gray-50/80">
+            <div class="col-span-2 font-mono text-[11px] text-gray-400">2026</div>
+            <div class="col-span-10 sm:col-span-6 text-[14px] font-medium text-ink">Full-Stack Developer Intern
+</div>
+            <div class="col-span-12 sm:col-span-4 text-[13px] text-gray-500 sm:text-right">Philippine Center for Postharvest Development and Mechanization (PhilMech)
+
+</div>
+          </div>
+          <div class="group grid grid-cols-12 items-baseline gap-3 py-2.5 hover:bg-gray-50/80">
+            <div class="col-span-2 font-mono text-[11px] text-gray-400">2022 - 2026</div>
+            <div class="col-span-10 sm:col-span-6 text-[14px] font-medium text-ink">BS Information Technology</div>
+            <div class="col-span-12 sm:col-span-4 text-[13px] text-gray-500 sm:text-right">Central Luzon State University</div>
+          </div>
+          <div class="group grid grid-cols-12 items-baseline gap-3 py-2.5 hover:bg-gray-50/80">
+            <div class="col-span-2 font-mono text-[11px] text-gray-400">2021 - 2022</div>
+            <div class="col-span-10 sm:col-span-6 text-[14px] font-medium text-ink">BS Information Systems</div>
+            <div class="col-span-12 sm:col-span-4 text-[13px] text-gray-500 sm:text-right">STI College San Jose</div>
+          </div>
+        </div>
+
+        <div class="mt-7">
+          <div class="mb-4 flex items-baseline justify-between">
+            <h3 class="font-mono text-[11px] uppercase tracking-wider text-gray-400">Stack</h3>
+            <a href="./stack.html" class="font-mono text-[11px] text-gray-400 hover:text-ink transition-colors duration-200">view all ↗</a>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">TypeScript</span>
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">React</span>
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">Next.js</span>
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">Node.js</span>
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">Python</span>
+            <span class="rounded-md border border-gray-200 bg-white px-2.5 py-1 font-mono text-[12px] text-gray-600">Laravel</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Recommendations ── -->
+      <section id="recommendations" class="py-14">
+        <div class="mb-8 flex items-baseline justify-between">
+          <h2 class="font-pixel text-sm text-gray-400">02 — recommendations</h2>
+        </div>
+
+        <div class="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div class="flex flex-col rounded-xl bg-gradient-to-b from-gray-50 to-white p-5 border border-gray-200">
+            <p class="rec-quote text-[13.5px] leading-relaxed text-gray-700">"Bryl, I believe, would be the next Philippine unicorn. He is technically skilled."</p>
+            <div class="mt-4 flex items-center gap-2.5 border-t border-gray-100 pt-3">
+              <div class="min-w-0">
+                <div class="text-[12px] font-semibold text-ink">Henry Aguda</div>
+                <div class="font-mono text-[9px] uppercase tracking-wider text-gray-400">Secretary, DICT</div>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-col rounded-xl bg-gradient-to-b from-gray-50 to-white p-5 border border-gray-200">
+            <p class="rec-quote text-[13.5px] leading-relaxed text-gray-700">"Bryl was the most talented software engineer I've mentored in a long time. Fast learner."</p>
+            <div class="mt-4 flex items-center gap-2.5 border-t border-gray-100 pt-3">
+              <div class="min-w-0">
+                <div class="text-[12px] font-semibold text-ink">Cris Lawrence Adrian Militante</div>
+                <div class="font-mono text-[9px] uppercase tracking-wider text-gray-400">Integrations Product Lead</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── Projects ── -->
+      <section id="projects" class="py-14">
+        <div class="mb-7 flex items-baseline justify-between">
+          <h2 class="font-pixel text-sm text-gray-400">03 — projects</h2>
+          <a href="./projects.html" class="font-mono text-[11px] uppercase tracking-wider text-gray-400 hover:text-ink transition-colors duration-200">view all →</a>
+        </div>
+
+        <div class="home-projects">
+
+          <a href="#" class="proj-card group">
+            <div class="proj-card-top">
+              <div class="proj-card-head">
+                <div class="proj-icon proj-icon--vault" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="7"/><path d="M12 8v4l2 2"/><path d="M8 12H6M18 12h-2M12 6V4M12 20v-2"/></svg>
+                </div>
+                <h3 class="proj-title">IVault</h3>
+              </div>
+              <svg class="proj-ext-link" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="proj-desc">A private, offline-first vault to scan, store, and view your important documents. No accounts. No cloud. No tracking — everything stays on your device.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">SQLite</span>
+              <span class="proj-tag">Drizzle</span>
+            </div>
+          </a>
+
+          <a href="#" class="proj-card group">
+            <div class="proj-card-top">
+              <div class="proj-card-head">
+                <div class="proj-icon proj-icon--krabby" aria-hidden="true">🦀</div>
+                <h3 class="proj-title">Krabby</h3>
+              </div>
+              <svg class="proj-ext-link" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="proj-desc">A private, offline-first mobile app to log, track, and analyse your daily expenses.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Expo</span>
+              <span class="proj-tag">SQLite</span>
+              <span class="proj-tag">Drizzle</span>
+              <span class="proj-tag">Uniwind</span>
+            </div>
+          </a>
+
+          <a href="#" class="proj-card group">
+            <div class="proj-card-top">
+              <div class="proj-card-head">
+                <div class="proj-icon proj-icon--popchain" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 4v10l-7 4-7-4V7l7-4z" stroke="currentColor" stroke-width="1.4"/><path d="M9 12h6M12 9v6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+                </div>
+                <h3 class="proj-title">PopChain</h3>
+              </div>
+              <svg class="proj-ext-link" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M5 11L11 5M11 5H6M11 5V10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <p class="proj-desc">PopChain lets you prove you were there. Scan, mint, collect. Your attendance, secured forever on the blockchain.</p>
+            <div class="proj-tags">
+              <span class="proj-tag">Next.js</span>
+              <span class="proj-tag">Sui Blockchain</span>
+              <span class="proj-tag">Tusky</span>
+              <span class="proj-tag">Supabase</span>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+      <!-- ── GitHub contributions ── -->
+      <section id="github" class="py-14">
+        <div class="mb-6 flex items-center justify-between">
+          <h2 class="font-pixel text-sm text-gray-400">04 — contributions</h2>
+          <a
+            href="https://github.com/MarkOliverrr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-[11px] font-mono text-gray-400 hover:text-ink transition-colors duration-200"
+          >
+            <img
+              src="https://avatars.githubusercontent.com/MarkOliverrr"
+              alt="MarkOliverrr GitHub avatar"
+              width="18"
+              height="18"
+              style="border-radius: 50%; display: inline-block; vertical-align: middle;"
+            />
+            @MarkOliverrr ↗
+          </a>
+        </div>
+        <a
+          href="https://github.com/MarkOliverrr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="block border border-gray-200 bg-gray-50 rounded-xl p-4 overflow-hidden hover:border-gray-300 transition-colors duration-200"
+          title="View GitHub profile"
+        >
+          <img
+            id="github-chart"
+            src="https://ghchart.rshah.org/MarkOliverrr"
+            alt="MarkOliverrr's GitHub contribution graph"
+            class="w-full"
+            style="display: block; min-height: 80px;"
+            loading="lazy"
+          />
+          <p class="mt-3 font-mono text-[10px] text-gray-400 text-right tracking-wider">contributions · past year</p>
+        </a>
+      </section>
+
+      <!-- Footer -->
+      <footer style="display: flex; justify-content: space-between; align-items: center; padding: 2rem 0 4rem 0;" class="border-t border-gray-200 mt-14">
+        <p class="font-mono text-[10px] text-gray-400">&copy; 2026 Mark Oliver Gurtiza.</p>
+      </footer>
+
+    </div>
+  </main>
+
+  <!-- ─────────────── ⌘K Ask Modal Overlay ─────────────── -->
+  <div id="askOverlay" role="dialog" aria-modal="true" aria-label="Ask">
+    <div class="ask-backdrop" onclick="closeAsk()"></div>
+    <div class="ask-content" onclick="focusAsk()">
+      <div class="ask-bubble" id="askBubble"><span id="askBubbleText"></span></div>
+      <div class="ask-head">
+        <div class="loader" id="askLoader"></div>
+        <h2 class="ask-title">what do you want to ask?</h2>
+      </div>
+      <div class="ask-field"><span id="askText"></span><span class="ask-caret"></span></div>
+      <input id="askInput" class="ask-hidden-input" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Type your question">
+    </div>
+  </div>
+
+  <!-- ─────────────── ⌘J Typing Test Modal Overlay ─────────────── -->
+  <div id="typingOverlay" role="dialog" aria-modal="true" aria-label="Typing test">
+    <div class="tt-backdrop" onclick="closeTyping()"></div>
+    <div class="tt-content">
+      <div class="tt-stats">
+        <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num" id="ttWpm">0</span></span><span class="tt-stat-label">wpm</span></div>
+        <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num" id="ttAcc">100</span><i>%</i></span><span class="tt-stat-label">acc</span></div>
+        <div class="tt-stat"><span class="tt-stat-val"><span class="tt-num" id="ttTime">0</span><i>s</i></span><span class="tt-stat-label">time</span></div>
+      </div>
+
+      <div class="tt-words-wrap"><div class="tt-words" id="ttWords"></div></div>
+      <div class="tt-keyboard" id="ttKeyboard"></div>
+
+      <div class="tt-hint">
+        <span><kbd class="px-1 bg-gray-200 border rounded">tab</kbd> restart</span>
+        <span><kbd class="px-1 bg-gray-200 border rounded">esc</kbd> close</span>
+      </div>
+      <div class="tt-confirm" id="ttConfirm">restart test? <kbd>↵</kbd> to confirm · <kbd>esc</kbd> cancel</div>
+
+      <div class="tt-results">
+        <div class="tt-res-main">
+          <span class="tt-res-wpm" id="ttResWpm">0</span>
+          <span class="tt-res-cap">words per minute</span>
+        </div>
+        <div class="tt-res-grid">
+          <div><b><span id="ttResAcc">0</span><i>%</i></b><label>accuracy</label></div>
+          <div><b><span id="ttResRaw">0</span></b><label>raw</label></div>
+          <div><b><span id="ttResTime">0</span><i>s</i></b><label>time</label></div>
+        </div>
+        <div class="tt-verdict" id="ttVerdict"></div>
+        <button type="button" class="tt-restart" onclick="ttRestart()">↻ try again</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Javascript functions -->
+  <script src="./main.js"></script>
+</body>
+</html>

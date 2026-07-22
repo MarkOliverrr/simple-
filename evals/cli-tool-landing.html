@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>gitgrove — Visualize git history as a growing garden</title>
+  <meta name="description" content="An open-source CLI tool that visualizes your git history as a growing digital garden.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Custom CLI theme overrides */
+    body {
+      font-family: var(--font-mono); /* Standard mono-flavored typography for a CLI landing page */
+    }
+
+    /* Keep headings as Geist (sans) but utilize Mono for the terminal feel */
+    .hero-title {
+      font-family: var(--font-sans);
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      text-transform: lowercase;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Custom Terminal Block */
+    .terminal-window {
+      background-color: var(--gray-50);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: var(--shadow-resting);
+      margin: 2rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .terminal-header {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--gray-200);
+      padding-bottom: 0.75rem;
+    }
+
+    .terminal-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--gray-300);
+    }
+
+    .terminal-body {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--ink);
+    }
+
+    .cli-prompt::before {
+      content: "$ ";
+      color: var(--gray-400);
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 10px;
+    }
+
+    /* Staggered entrance delay */
+    .fade-up-group > *:nth-child(1) { transition-delay: 50ms; }
+    .fade-up-group > *:nth-child(2) { transition-delay: 120ms; }
+    .fade-up-group > *:nth-child(3) { transition-delay: 190ms; }
+    .fade-up-group > *:nth-child(4) { transition-delay: 260ms; }
+  </style>
+</head>
+<body class="dark">
+
+  <main class="content-container fade-up-group">
+    
+    <!-- Header / Nav -->
+    <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4rem;">
+      <div style="font-family: var(--font-sans); font-weight: 700; font-size: 1.2rem; letter-spacing: -0.02em;">gitgrove</div>
+      <div style="display: flex; gap: 1.5rem;">
+        <a href="#features" class="micro-label" style="background-image: none;">features</a>
+        <a href="#install" class="micro-label" style="background-image: none;">install</a>
+        <button id="theme-toggle" class="tag-pill" style="cursor: pointer; font-size: 8px;">theme</button>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="section-gap" style="position: relative;">
+      <!-- Halftone decoration behind Hero -->
+      <div class="halftone-bg" style="position: absolute; top: -3rem; right: -2rem; width: 140px; height: 140px; opacity: 0.8; z-index: -1;"></div>
+      
+      <h1 class="hero-title">gitgrove</h1>
+      <p class="text-muted" style="font-size: 16px; line-height: 1.6; max-width: 32rem; margin-bottom: 2rem;">
+        An open-source CLI utility that transforms your repository's commits, branches, and merges into an organic, evolving digital garden.
+      </p>
+
+      <!-- Simulated Terminal Display -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div class="terminal-dot"></div>
+          <div style="margin-left: auto; font-size: 9px;" class="micro-label">gitgrove --visualize</div>
+        </div>
+        <div class="terminal-body">
+          <p class="cli-prompt" style="margin-bottom: 0.5rem;">gitgrove --visualize</p>
+          <p style="color: var(--gray-400); margin-bottom: 0.5rem;">Scanning git history... found 1,402 commits.</p>
+          <pre style="font-family: var(--font-mono); line-height: 1.2; color: var(--ink);">
+  (❁)       (✿)       (❀)
+   │         │         │
+ ──┼─────────┼─────────┼─── [main]
+   │  (•)    │         │
+   ├───┘     │         │
+   │        ┌┴┐        │
+ ──┴────────┴─┴────────┴─── [feature/garden-plot]
+          </pre>
+          <p style="margin-top: 0.5rem; color: var(--gray-400);">Garden generated. 3 stems, 5 blossoms, 2 cross-pollinations.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section-gap">
+      <div class="section-header">01 — features</div>
+      
+      <div style="display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin-top: 2rem;">
+        
+        <!-- Feature 1 -->
+        <div class="card-medium card-inset-accent">
+          <p class="micro-label" style="margin-bottom: 0.5rem; color: var(--gray-400);">01 / commits</p>
+          <h3 style="font-family: var(--font-sans); font-size: 15px; margin-bottom: 0.5rem;">organic growth</h3>
+          <p class="text-muted" style="font-size: 13px; line-height: 1.5;">
+            Every commit sprouts a leaf. Merges form cross-pollinating branches. Watch your code grow organically over time.
+          </p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="card-medium card-inset-accent">
+          <p class="micro-label" style="margin-bottom: 0.5rem; color: var(--gray-400);">02 / taxonomy</p>
+          <h3 style="font-family: var(--font-sans); font-size: 15px; margin-bottom: 0.5rem;">author species</h3>
+          <p class="text-muted" style="font-size: 13px; line-height: 1.5;">
+            Different contributors represent different botanical species. Identify high-frequency contributors by flower density.
+          </p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="card-medium card-inset-accent">
+          <p class="micro-label" style="margin-bottom: 0.5rem; color: var(--gray-400);">03 / renders</p>
+          <h3 style="font-family: var(--font-sans); font-size: 15px; margin-bottom: 0.5rem;">ascii or vector</h3>
+          <p class="text-muted" style="font-size: 13px; line-height: 1.5;">
+            Output directly as pure ASCII art inside your terminal, or export to standard SVG and vector assets for web publishing.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Install Section -->
+    <section id="install" class="section-gap">
+      <div class="section-header">02 — installation</div>
+      
+      <p class="text-muted" style="margin-bottom: 1.5rem; font-size: 13px;">
+        Install the package globally via your preferred package manager to run the CLI command anywhere on your machine.
+      </p>
+
+      <div class="card-medium" style="display: flex; align-items: center; justify-content: space-between; padding: 1rem 1.25rem;">
+        <span style="font-family: var(--font-mono); font-size: 13px; color: var(--ink);" id="install-cmd">npm i -g gitgrove</span>
+        <button onclick="copyInstallCmd()" class="tag-pill-featured" style="cursor: pointer; padding: 4px 10px; font-size: 9px;" id="copy-btn">copy</button>
+      </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Footer -->
+    <footer style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem;">
+      <p class="micro-label" style="color: var(--gray-500);">&copy; 2026 Gitgrove Project.</p>
+      <div>
+        <a href="https://github.com" class="micro-label external">github repository</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Copy Command to Clipboard
+    function copyInstallCmd() {
+      const text = document.getElementById('install-cmd').innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copy-btn');
+        btn.innerText = 'copied!';
+        setTimeout(() => {
+          btn.innerText = 'copy';
+        }, 1500);
+      });
+    }
+
+    // Staggered Entrance Animation activation
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".fade-up-group > *");
+      items.forEach((item, index) => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(12px)";
+        item.style.transition = "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)";
+        setTimeout(() => {
+          item.style.opacity = "1";
+          item.style.transform = "translateY(0)";
+        }, 50 + index * 70);
+      });
+    });
+
+    // Theme Toggle Functionality
+    const toggleBtn = document.getElementById('theme-toggle');
+    
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.removeItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (systemDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+      });
+    }
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('system');
+    }
+  </script>
+</body>
+</html>

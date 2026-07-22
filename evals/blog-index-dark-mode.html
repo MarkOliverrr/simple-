@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>field notes — A minimal web journal</title>
+  <meta name="description" content="Thoughts on brutalist design, monochrome aesthetics, and code environments.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Custom blog index styling */
+    .post-item {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--gray-200);
+      transition: border-color var(--transition-fast);
+    }
+    
+    .post-item:last-child {
+      border-bottom: none;
+    }
+
+    .post-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .post-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      transition: opacity var(--transition-fast);
+      background-image: none; /* remove default link underline style */
+    }
+
+    .post-item:hover .post-title {
+      opacity: 0.7;
+    }
+
+    /* Staggered entrance delays */
+    .fade-up-group > *:nth-child(1) { transition-delay: 50ms; }
+    .fade-up-group > *:nth-child(2) { transition-delay: 120ms; }
+    .fade-up-group > *:nth-child(3) { transition-delay: 190ms; }
+    .fade-up-group > *:nth-child(4) { transition-delay: 260ms; }
+    .fade-up-group > *:nth-child(5) { transition-delay: 330ms; }
+  </style>
+</head>
+<body class="dark">
+
+  <main class="content-container fade-up-group">
+    
+    <!-- Top Header -->
+    <header style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4rem;">
+      <div>
+        <h1 class="display-title">field notes</h1>
+        <p class="micro-label" style="color: var(--gray-400); margin-top: 0.5rem;">by bryllim.com</p>
+      </div>
+      <div>
+        <button id="theme-toggle" class="tag-pill" style="cursor: pointer;">mode / system</button>
+      </div>
+    </header>
+
+    <!-- Halftone background accent in index header -->
+    <div style="position: relative; margin-bottom: 3.5rem;">
+      <div class="halftone-bg" style="position: absolute; top: -3rem; right: 0; width: 100%; height: 100px; pointer-events: none; z-index: -1; mask-image: linear-gradient(to right, transparent, black 80%); -webkit-mask-image: linear-gradient(to right, transparent, black 80%);"></div>
+    </div>
+
+    <!-- Section 01: Blog list -->
+    <section class="section-gap">
+      <div class="section-header">01 — journal entries</div>
+      
+      <div style="display: flex; flex-direction: column;" id="posts-list">
+        
+        <!-- Post 1 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-07-18">july 18, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill-featured">design</span>
+              <span class="tag-pill">brutalist</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">visual silence in modern brutalism</a>
+        </article>
+
+        <!-- Post 2 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-07-04">july 04, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill">css</span>
+              <span class="tag-pill">minimalism</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">the one-pixel boundary: borders as structural guides</a>
+        </article>
+
+        <!-- Post 3 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-06-28">june 28, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill">photography</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">chasing urban shadows in seoul at 3am</a>
+        </article>
+
+        <!-- Post 4 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-06-15">june 15, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill">motion</span>
+              <span class="tag-pill">web</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">subtle movement, sudden ease: crafting page transitions</a>
+        </article>
+
+        <!-- Post 5 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-06-02">june 02, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill">graphics</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">building textures with repeating halftone dot fields</a>
+        </article>
+
+        <!-- Post 6 -->
+        <article class="post-item">
+          <div class="post-meta-row">
+            <time class="micro-label" datetime="2026-05-24">may 24, 2026</time>
+            <div style="display: flex; gap: 0.5rem;">
+              <span class="tag-pill">philosophy</span>
+            </div>
+          </div>
+          <a href="#" class="post-title">monochrome ink and pixel values: a return to raw text</a>
+        </article>
+
+      </div>
+    </section>
+
+    <div class="divider" style="margin-top: 4rem;"></div>
+
+    <!-- Footer -->
+    <footer style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem;">
+      <p class="micro-label" style="color: var(--gray-500);">&copy; 2026 Field Notes.</p>
+      <div style="display: flex; gap: 1rem;">
+        <a href="https://bryllim.com" class="micro-label external">bryllim.com</a>
+        <a href="#" class="micro-label">rss feed</a>
+      </div>
+    </footer>
+
+  </main>
+
+  <script>
+    // Staggered Entrance Animation activation
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".fade-up-group > *");
+      items.forEach((item, index) => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(12px)";
+        item.style.transition = "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)";
+        setTimeout(() => {
+          item.style.opacity = "1";
+          item.style.transform = "translateY(0)";
+        }, 50 + index * 70);
+      });
+    });
+
+    // Theme Toggle Functionality with View Transitions if supported
+    const toggleBtn = document.getElementById('theme-toggle');
+    
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.removeItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (systemDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }
+    }
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', (e) => {
+        const isDark = document.documentElement.classList.contains('dark');
+        const targetTheme = isDark ? 'light' : 'dark';
+
+        // Check if document.startViewTransition is supported
+        if (document.startViewTransition) {
+          document.startViewTransition(() => {
+            setTheme(targetTheme);
+          });
+        } else {
+          setTheme(targetTheme);
+        }
+      });
+    }
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('system');
+    }
+  </script>
+</body>
+</html>

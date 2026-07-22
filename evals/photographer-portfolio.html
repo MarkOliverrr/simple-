@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>June Park — Portfolio</title>
+  <meta name="description" content="Seoul-based freelance photographer focusing on architectural lines and nocturnal urban light.">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    /* Custom style overrides for photographer portfolio */
+    body {
+      padding: 0;
+      margin: 0;
+    }
+    
+    /* Subtle fade-in stagger sequence */
+    .fade-up-group > *:nth-child(1) { transition-delay: 50ms; }
+    .fade-up-group > *:nth-child(2) { transition-delay: 120ms; }
+    .fade-up-group > *:nth-child(3) { transition-delay: 190ms; }
+    .fade-up-group > *:nth-child(4) { transition-delay: 260ms; }
+    .fade-up-group > *:nth-child(5) { transition-delay: 330ms; }
+
+    /* Custom photo card overlay design */
+    .work-card {
+      position: relative;
+      cursor: pointer;
+    }
+    
+    .work-image-wrapper {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid var(--gray-200);
+      background-color: var(--gray-50);
+    }
+
+    .work-image-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(100%) contrast(1.1);
+      transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1), filter 500ms ease;
+    }
+
+    .work-card:hover .work-image-wrapper img {
+      transform: scale(1.04);
+      filter: grayscale(0%) contrast(1.05); /* Slight color reveal on hover for interactive feel */
+    }
+
+    /* Halftone overlay on photos that fades out */
+    .photo-halftone-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+      background-size: 8px 8px;
+      opacity: 0.15;
+      pointer-events: none;
+      transition: opacity var(--transition-medium);
+      mix-blend-mode: multiply;
+    }
+
+    [data-theme="dark"] .photo-halftone-overlay {
+      mix-blend-mode: screen;
+      opacity: 0.1;
+    }
+
+    .work-card:hover .photo-halftone-overlay {
+      opacity: 0;
+    }
+
+    .work-info {
+      margin-top: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .work-title {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .work-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--gray-400);
+    }
+
+    /* Minimal Contact Form */
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 28rem;
+    }
+  </style>
+</head>
+<body class="dark">
+  <!-- Desktop Sidebar Navigation -->
+  <aside class="desktop-sidebar">
+    <div class="display-title" style="margin-bottom: 2.5rem; font-size: 2rem;">jp</div>
+    <nav style="display: flex; flex-direction: column; gap: 1rem;">
+      <a href="#about" class="micro-label nav-item-active" style="background-image: none;">01 — about</a>
+      <a href="#work" class="micro-label" style="background-image: none;">02 — work</a>
+      <a href="#contact" class="micro-label" style="background-image: none;">03 — contact</a>
+    </nav>
+    <div style="position: absolute; bottom: 3.5rem; left: 1.5rem;">
+      <button id="theme-toggle" class="tag-pill" style="cursor: pointer;">mode / system</button>
+    </div>
+  </aside>
+
+  <!-- Mobile Sticky Header -->
+  <header class="mobile-top-bar">
+    <div class="display-title" style="font-size: 1.5rem;">jp</div>
+    <div style="display: flex; gap: 1rem; align-items: center;">
+      <a href="#work" class="micro-label" style="background-image: none; font-size: 9px;">work</a>
+      <a href="#contact" class="micro-label" style="background-image: none; font-size: 9px;">contact</a>
+      <button id="theme-toggle-mobile" class="tag-pill" style="cursor: pointer; font-size: 8px; padding: 2px 6px;">mode</button>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="main-content-layout main-content-container">
+    <div class="content-container-wide fade-up-group">
+      
+      <!-- Section 01: About -->
+      <section id="about" class="section-gap" style="position: relative;">
+        <!-- Halftone dot background accent in top right of about -->
+        <div class="halftone-bg" style="position: absolute; top: -2rem; right: 0; width: 150px; height: 150px; pointer-events: none; z-index: -1;"></div>
+        
+        <div class="section-header">01 — about</div>
+        <h1 class="display-title" style="margin-bottom: 1.5rem;">june park</h1>
+        <p class="micro-label-darker" style="margin-bottom: 1.5rem;">Seoul, South Korea — Freelance Photographer</p>
+        <div class="long-form" style="max-width: 38rem;">
+          <p>
+            I document the tension between structure and atmosphere. My practice focuses on the geometric lines of Seoul's brutalist architecture and the silent transitions of light across the urban landscape at night.
+          </p>
+          <p>
+            Working exclusively with high-contrast monochrome and natural night-time illumination, I attempt to capture the quiet, editorial solitude that exists beneath the city's frantic pace.
+          </p>
+        </div>
+      </section>
+
+      <!-- Section 02: Selected Work -->
+      <section id="work" class="section-gap">
+        <div class="section-header">02 — selected work</div>
+        
+        <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem;" id="work-grid">
+          <!-- Card 1 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <!-- Embedded SVG representing a premium camera wireframe / lens shot -->
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #121214; display: block;">
+                <rect width="100%" height="100%" fill="#121214"/>
+                <circle cx="200" cy="150" r="80" stroke="rgba(244, 244, 245, 0.15)" stroke-width="1" fill="none" />
+                <circle cx="200" cy="150" r="50" stroke="rgba(244, 244, 245, 0.2)" stroke-dasharray="2, 2" stroke-width="1" fill="none" />
+                <line x1="200" y1="0" x2="200" y2="300" stroke="rgba(244, 244, 245, 0.05)" stroke-width="1" />
+                <line x1="0" y1="150" x2="400" y2="150" stroke="rgba(244, 244, 245, 0.05)" stroke-width="1" />
+                <text x="210" y="80" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">ELEV. 114M</text>
+                <text x="210" y="230" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">SEOUL_STREET_NIGHT_01</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">nocturnal alignment</span>
+              <span class="work-meta">seoul, 2026</span>
+            </div>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #18181c; display: block;">
+                <rect width="100%" height="100%" fill="#18181c"/>
+                <rect x="100" y="60" width="200" height="180" stroke="rgba(244, 244, 245, 0.15)" stroke-width="1" fill="none" />
+                <line x1="100" y1="60" x2="300" y2="240" stroke="rgba(244, 244, 245, 0.08)" stroke-width="1" />
+                <line x1="300" y1="60" x2="100" y2="240" stroke="rgba(244, 244, 245, 0.08)" stroke-width="1" />
+                <text x="110" y="80" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">DDP_BRUTALIST_04</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">dongdaemun curve</span>
+              <span class="work-meta">seoul, 2025</span>
+            </div>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #0e0e10; display: block;">
+                <rect width="100%" height="100%" fill="#0e0e10"/>
+                <path d="M 50,220 L 150,120 L 250,180 L 350,90" stroke="rgba(244, 244, 245, 0.2)" stroke-width="1" fill="none"/>
+                <circle cx="150" cy="120" r="3" fill="rgba(244, 244, 245, 0.5)"/>
+                <circle cx="350" cy="90" r="3" fill="rgba(244, 244, 245, 0.5)"/>
+                <text x="60" y="210" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">HAN_RIVER_02</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">fog over river han</span>
+              <span class="work-meta">seoul, 2026</span>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #151518; display: block;">
+                <rect width="100%" height="100%" fill="#151518"/>
+                <ellipse cx="200" cy="150" rx="120" ry="60" stroke="rgba(244, 244, 245, 0.15)" stroke-width="1" fill="none" />
+                <line x1="80" y1="150" x2="320" y2="150" stroke="rgba(244, 244, 245, 0.1)" stroke-width="1"/>
+                <text x="90" y="140" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">PORTRAIT_SHADOW_09</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">j. study in contrast</span>
+              <span class="work-meta">seoul, 2025</span>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #101012; display: block;">
+                <rect width="100%" height="100%" fill="#101012"/>
+                <rect x="50" y="50" width="300" height="200" stroke="rgba(244, 244, 245, 0.1)" stroke-width="1" fill="none" />
+                <line x1="50" y1="50" x2="350" y2="250" stroke="rgba(244, 244, 245, 0.08)" stroke-width="1" />
+                <text x="65" y="75" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">NAMDAEMUN_STALLS_01</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">kinetic namdaemun</span>
+              <span class="work-meta">seoul, 2026</span>
+            </div>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="work-card">
+            <div class="work-image-wrapper">
+              <div class="photo-halftone-overlay"></div>
+              <svg width="100%" height="100%" viewBox="0 0 400 300" style="background-color: #1a1a1e; display: block;">
+                <rect width="100%" height="100%" fill="#1a1a1e"/>
+                <polygon points="200,60 120,240 280,240" stroke="rgba(244, 244, 245, 0.15)" stroke-width="1" fill="none"/>
+                <text x="130" y="230" fill="rgba(244, 244, 245, 0.3)" font-family="monospace" font-size="8">NAMSAN_GEOMETRY_15</text>
+              </svg>
+            </div>
+            <div class="work-info">
+              <span class="work-title">namsan silhouette</span>
+              <span class="work-meta">seoul, 2026</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 03: Contact -->
+      <section id="contact" class="section-gap">
+        <div class="section-header">03 — contact</div>
+        <p class="text-muted" style="margin-bottom: 2rem; max-width: 32rem;">
+          For assignments, print acquisitions, or collaborations, feel free to reach out via email. Or send a message using the form below.
+        </p>
+        
+        <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent!');">
+          <div>
+            <label class="micro-label" style="display: block; margin-bottom: 0.5rem;">your name</label>
+            <input type="text" class="input-minimal" placeholder="e.g., Jane Doe" required>
+          </div>
+          <div>
+            <label class="micro-label" style="display: block; margin-bottom: 0.5rem;">email address</label>
+            <input type="email" class="input-minimal" placeholder="e.g., jane@example.com" required>
+          </div>
+          <div>
+            <label class="micro-label" style="display: block; margin-bottom: 0.5rem;">message</label>
+            <textarea class="input-minimal" rows="5" placeholder="Outline your project details..." style="resize: vertical;" required></textarea>
+          </div>
+          <div style="margin-top: 0.5rem;">
+            <button type="submit" class="btn-primary">Send Message</button>
+          </div>
+        </form>
+
+        <div class="divider" style="margin-top: 3.5rem;"></div>
+
+        <footer style="display: flex; justify-content: space-between; align-items: center; padding-top: 1rem;">
+          <p class="micro-label" style="color: var(--gray-500);">&copy; 2026 June Park. All rights reserved.</p>
+          <div style="display: flex; gap: 1rem;">
+            <a href="https://instagram.com" class="micro-label external">instagram</a>
+            <a href="https://twitter.com" class="micro-label external">twitter</a>
+          </div>
+        </footer>
+      </section>
+      
+    </div>
+  </main>
+
+  <script>
+    // Staggered Entrance Animation activation
+    document.addEventListener("DOMContentLoaded", () => {
+      const items = document.querySelectorAll(".fade-up-group > *");
+      items.forEach((item, index) => {
+        item.style.opacity = "0";
+        item.style.transform = "translateY(12px)";
+        item.style.transition = "opacity 700ms cubic-bezier(0.16, 1, 0.3, 1), transform 700ms cubic-bezier(0.16, 1, 0.3, 1)";
+        setTimeout(() => {
+          item.style.opacity = "1";
+          item.style.transform = "translateY(0)";
+        }, 50 + index * 70);
+      });
+
+      // Highlight active nav item on scroll
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll(".desktop-sidebar nav a");
+
+      window.addEventListener("scroll", () => {
+        let current = "";
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (pageYOffset >= (sectionTop - 150)) {
+            current = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach(a => {
+          a.classList.remove("nav-item-active");
+          if (a.getAttribute("href") === `#${current}`) {
+            a.classList.add("nav-item-active");
+          }
+        });
+      });
+    });
+
+    // Theme Toggle Functionality
+    const themeToggles = [
+      document.getElementById('theme-toggle'),
+      document.getElementById('theme-toggle-mobile')
+    ];
+    
+    function setTheme(theme) {
+      if (theme === 'dark') {
+        document.documentElement.classList.add('dark');
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      } else if (theme === 'light') {
+        document.documentElement.classList.remove('dark');
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        localStorage.removeItem('theme');
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (systemDark) {
+          document.documentElement.classList.add('dark');
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      }
+    }
+
+    themeToggles.forEach(toggle => {
+      if (!toggle) return;
+      toggle.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.contains('dark');
+        setTheme(isDark ? 'light' : 'dark');
+      });
+    });
+
+    // Initialize Theme
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      setTheme(savedTheme);
+    } else {
+      setTheme('system');
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "skill_name": "bryl-minimal-design",
+  "evals": [
+    {
+      "id": 0,
+      "eval_name": "photographer-portfolio",
+      "prompt": "hey can you make me a personal portfolio site? i'm a freelance photographer named June Park based in Seoul. single index.html file, self-contained (no build step). sections: intro/about, selected work (6 placeholder pieces is fine), and contact. i want it to look clean and minimal.",
+      "expected_output": "A single self-contained index.html portfolio that follows the bryl-minimal aesthetic: monochrome, Geist fonts, mono micro-labels, numbered section headers, dark mode, halftone accent, fade-up stagger.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "eval_name": "cli-tool-landing",
+      "prompt": "Build a landing page for 'gitgrove', an open-source CLI tool that visualizes your git history as a growing garden. One self-contained HTML file: hero with the tool name and one-liner, a features section (3-4 features), an install section (it's `npm i -g gitgrove`), and a footer with a GitHub link. Keep the design minimal and tasteful.",
+      "expected_output": "A single self-contained HTML landing page in the bryl-minimal aesthetic, with terminal-flavored typography suiting a CLI tool.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "eval_name": "blog-index-dark-mode",
+      "prompt": "Create a blog index page as one self-contained HTML file. Header with the blog name 'field notes', a list of 6 posts (title, date, 1-2 tags each), and a footer. Include a working light/dark theme toggle. Minimal, typography-focused design please.",
+      "expected_output": "A single self-contained HTML blog index in the bryl-minimal aesthetic with a working light/dark/system-aware toggle implemented as a token swap.",
+      "files": []
+    }
+  ]
+}
