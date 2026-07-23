@@ -660,9 +660,14 @@ window.closeMobileNav = function() {
 }
 
 
-function openImage(src) {
+function openImage(src, title, desc) {
 
     document.getElementById("modalImg").src = src;
+
+    var titleEl = document.getElementById("modalTitle");
+    var descEl = document.getElementById("modalDesc");
+    if (titleEl) titleEl.textContent = title || '';
+    if (descEl) descEl.textContent = desc || '';
 
     document.getElementById("imageModal").classList.remove("hidden");
     document.getElementById("imageModal").classList.add("flex");
