@@ -684,3 +684,102 @@ function closeImage() {
     document.body.style.overflow = "auto";
 
 }
+
+// ── 7. Sound Manager ──
+(function () {
+  const HOVER_SOUND = './hover.mp3';
+  const CLICK_SOUND = './click.mp3';
+  const SOUND_WAV = './sound.wav';
+  const KEY = 'soundEnabled';
+  let soundEnabled = localStorage.getItem(KEY) !== 'false';
+
+  var audioCtx = null;
+  var buffers = {};
+
+  function ensureCtx() {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    return audioCtx;
+  }
+
+  function loadBuffer(src, cb) {
+    if (buffers[src]) { cb(buffers[src]); return; }
+    var req = new XMLHttpRequest();
+    req.open('GET', src, true);
+    req.responseType = 'arraybuffer';
+    req.onload = function () {
+      ensureCtx().decodeAudioData(req.response, function (buf) {
+        buffers[src] = buf;
+        cb(buf);
+      }, function () {});
+    };
+    req.send();
+  }
+
+  function playBuffer(src, vol) {
+    if (!soundEnabled) return;
+    loadBuffer(src, function (buf) {
+      var ctx = ensureCtx();
+      var source = ctx.createBufferSource();
+      source.buffer = buf;
+      var gain = ctx.createGain();
+      gain.gain.value = vol;
+      source.connect(gain);
+      gain.connect(ctx.destination);
+      source.start(0);
+    });
+  }
+
+  function playClick() { playBuffer(CLICK_SOUND, 0.2); }
+  function playHover() { playBuffer(HOVER_SOUND, 0.15); }
+  function playWav()   { playBuffer(SOUND_WAV, 0.25); }
+
+  window.playHoverSound = playHover;
+  window.playClickSound = playClick;
+  window.playWavSound = playWav;
+
+  function updateSoundBtns() {
+    document.querySelectorAll('[data-sound-toggle]').forEach(function (btn) {
+      btn.classList.toggle('sound-off', !soundEnabled);
+      btn.setAttribute('aria-label', soundEnabled ? 'Disable sounds' : 'Enable sounds');
+    });
+  }
+
+  window.toggleSound = function (ev) {
+    if (ev) ev.stopPropagation();
+    soundEnabled = !soundEnabled;
+    try { localStorage.setItem(KEY, soundEnabled); } catch (e) {}
+    updateSoundBtns();
+    if (soundEnabled) playWav();
+  };
+
+  function unlock() {
+    document.removeEventListener('click', unlock);
+    document.removeEventListener('touchstart', unlock);
+    document.removeEventListener('keydown', unlock);
+    ensureCtx();
+  }
+  document.addEventListener('click', unlock);
+  document.addEventListener('touchstart', unlock);
+  document.addEventListener('keydown', unlock);
+
+  document.addEventListener('DOMContentLoaded', function () {
+    updateSoundBtns();
+
+    var selectors = 'a, button, .deck-card, .cert-card, .proj-card, .mnav-group a, .mnav-group button, [onclick], [data-sound-hover]';
+    document.querySelectorAll(selectors).forEach(function (el) {
+      if (!el.hasAttribute('data-sound-hover')) el.setAttribute('data-sound-hover', 'true');
+      if (!el.hasAttribute('data-sound-click')) el.setAttribute('data-sound-click', 'true');
+      el.addEventListener('mouseenter', function () { if (el.getAttribute('data-sound-hover') === 'true') playHover(); });
+      el.addEventListener('click', function (e) {
+        if (el.getAttribute('data-sound-click') !== 'true') return;
+        playClick();
+        if (el.tagName === 'A' && el.href && el.hostname === location.hostname && el.getAttribute('href') !== '#' && !el.getAttribute('href').startsWith('#')) {
+          e.preventDefault();
+          var href = el.href;
+          setTimeout(function () { location.href = href; }, 180);
+        }
+      });
+    });
+  });
+})();

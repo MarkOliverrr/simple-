@@ -644,3 +644,9 @@ html.dark #github-chart {
 .placeholder-line--md { width: 60%; }
 .placeholder-line--lg { width: 80%; }
 .placeholder-line--full { width: 100%; }
+
+/* Sound toggle icons */
+.sound-on-icon { display: block; }
+.sound-off-icon { display: none; }
+.sound-off .sound-on-icon { display: none; }
+.sound-off .sound-off-icon { display: block; }
