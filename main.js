@@ -735,11 +735,10 @@ function closeImage() {
       el.addEventListener('mouseenter', function () { if (el.getAttribute('data-sound-hover') === 'true') playHover(); });
       el.addEventListener('click', function (e) {
         if (el.getAttribute('data-sound-click') !== 'true') return;
-        playClick();
-        if (el.tagName === 'A' && el.href && el.hostname === location.hostname && el.getAttribute('href') !== '#' && !el.getAttribute('href').startsWith('#')) {
-          e.preventDefault();
-          var href = el.href;
-          setTimeout(function () { location.href = href; }, 100);
+        if (el.tagName === 'A' && el.hostname === location.hostname) {
+          playClick();
+        } else {
+          playClick();
         }
       });
     });
