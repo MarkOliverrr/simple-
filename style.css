@@ -650,3 +650,89 @@ html.dark #github-chart {
 .sound-off-icon { display: none; }
 .sound-off .sound-on-icon { display: none; }
 .sound-off .sound-off-icon { display: block; }
+
+/* Project Modal - theme-aware */
+#projectModal {
+  background: rgba(0, 0, 0, 0.75);
+}
+#projectModal > div {
+  background: rgb(var(--g100));
+  border-color: rgb(var(--g300));
+  color: rgb(var(--ink));
+}
+#projectModal h2,
+#projectModal h3 {
+  color: rgb(var(--ink));
+}
+#projectModal p {
+  color: rgb(var(--ink));
+}
+#projectModal .tag-pill,
+#projectModal .proj-tag {
+  background: rgb(var(--g200));
+  border-color: rgb(var(--g300));
+  color: rgb(var(--ink));
+}
+#projectModal a {
+  border-color: rgb(var(--g300));
+  background: rgb(var(--g200));
+  color: rgb(var(--ink));
+}
+#projectModal a:hover {
+  background: rgb(var(--g300));
+}
+#projectModal button[onclick*="closeProjectModal"] {
+  background: rgb(var(--g200));
+  color: rgb(var(--ink));
+}
+#projectModal button[onclick*="closeProjectModal"]:hover {
+  background: rgb(var(--g300));
+  color: rgb(var(--ink));
+}
+#projectModal .font-mono {
+  color: rgb(var(--ink));
+}
+#projectModal .text-white,
+#projectModal .text-white\/70,
+#projectModal .text-white\/90,
+#projectModal .text-white\/50 {
+  color: rgb(var(--ink)) !important;
+}
+html.dark #projectModal .text-white,
+html.dark #projectModal .text-white\/70,
+html.dark #projectModal .text-white\/90,
+html.dark #projectModal .text-white\/50 {
+  color: rgb(var(--ink)) !important;
+}
+
+/* Gallery & Cert Modals - theme-aware */
+#galleryLightbox,
+#imageModal {
+  background: rgba(0, 0, 0, 0.75);
+}
+#galleryLightbox > div,
+#imageModal > div {
+  background: rgb(var(--g100));
+  border-color: rgb(var(--g300));
+  color: rgb(var(--ink));
+}
+#galleryLightbox h3,
+#galleryLightbox p,
+#imageModal h3,
+#imageModal p {
+  color: rgb(var(--ink));
+}
+#galleryLightbox button[onclick*="closeGallery"],
+#galleryLightbox button[onclick*="closeImage"],
+#imageModal button[onclick*="closeGallery"],
+#imageModal button[onclick*="closeImage"] {
+  background: rgb(var(--g200));
+  color: rgb(var(--ink));
+}
+#galleryLightbox button[onclick*="closeGallery"]:hover,
+#galleryLightbox button[onclick*="closeImage"]:hover,
+#imageModal button[onclick*="closeGallery"]:hover,
+#imageModal button[onclick*="closeImage"]:hover {
+  background: rgb(var(--g300));
+  color: rgb(var(--ink));
+}

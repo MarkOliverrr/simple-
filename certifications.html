@@ -277,7 +277,7 @@
   src="./images/philmech cert.png"
   alt="PhilMech – Internship Certificate of Completion"
   class="max-h-full max-w-full object-contain cursor-pointer transition hover:scale-105"
-  onclick="openImage(this.src, 'Data Visualization with Python', 'Kaggle • APR 2025')"
+  onclick="openImage(this.src, 'PhilMech – Internship Certificate of Completion', 'PhilMech • APR 2026')"
 >
     </div>
 
@@ -341,17 +341,16 @@
 <div
     id="imageModal"
     class="fixed inset-0 z-[9999] hidden items-center justify-center backdrop-blur-sm"
-    style="background: rgba(0,0,0,0.75);"
     onclick="closeImage()"
 >
-<div class="relative w-full max-w-2xl mx-4 sm:mx-auto rounded-2xl overflow-hidden shadow-2xl border border-white/20" style="background: #2d2d44;" onclick="event.stopPropagation()">
-      <button onclick="closeImage()" class="absolute top-2 right-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition">✕</button>
-      <img id="modalImg" class="w-full max-h-[65vh] object-contain" style="background: #2d2d44;">
-      <div class="p-4 sm:p-5">
-        <h3 id="modalTitle" class="font-pixel text-base text-white mb-2"></h3>
-        <p id="modalDesc" class="font-mono text-[12px] leading-relaxed text-white"></p>
-      </div>
-    </div>
+<div class="relative w-full max-w-2xl mx-4 sm:mx-auto rounded-2xl overflow-hidden shadow-2xl border" onclick="event.stopPropagation()">
+  <button onclick="closeImage()" class="absolute top-2 right-2 z-10 flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/70 hover:bg-white/20 hover:text-white transition">✕</button>
+  <img id="modalImg" class="w-full max-h-[65vh] object-contain">
+  <div class="p-4 sm:p-5">
+    <h3 id="modalTitle" class="font-pixel text-base mb-2"></h3>
+    <p id="modalDesc" class="font-mono text-[12px] leading-relaxed"></p>
+  </div>
+</div>
 </div>
   <script src="./main.js"></script>
 </body>
