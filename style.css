@@ -23,6 +23,11 @@
   --halftone: rgba(10, 10, 10, 0.9);
   --sel-bg: #0a0a0a;
   --sel-fg: #ffffff;
+  --text-muted: 115 115 115;
+  --text-body: 10 10 10;
+  --bg-card: 245 245 245;
+  --border-border: 212 212 212;
+  --bg-accent: 233 233 233;
   color-scheme: light;
 }
 
@@ -43,6 +48,11 @@ html.dark {
   --halftone: rgba(244, 244, 245, 0.42);
   --sel-bg: #fafafa;
   --sel-fg: #0a0a0a;
+  --text-muted: 160 160 168;
+  --text-body: 244 244 245;
+  --bg-card: 30 30 34;
+  --border-border: 58 58 66;
+  --bg-accent: 42 42 48;
   color-scheme: dark;
 }
 
